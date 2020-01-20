@@ -1,9 +1,14 @@
 import React from 'react';
-// import TodoListItem from '../todo-list-item';
+import TodoListItem from '../todo-list-item';
 import './todo-list.css';
 
 interface TodoListProps {
-  todos: Array<Record<string, any>>;
+  todos: Array<{
+    id: number;
+    important: boolean;
+    done: boolean;
+    label: string;
+  }>;
   onDeleted: Function;
   onToggleImportant: Function;
   onToggleDone: Function;
@@ -17,15 +22,16 @@ export const TodoList = ({
 }: TodoListProps): JSX.Element => {
   const elements = todos.map(item => {
     const { id, ...itemProps } = item;
-
     return (
       <li key={id} className='list-group-item'>
-        {/* <TodoListItem
-          {...itemProps }
-          onDeleted={() => onDeleted(id)}
-          onToggleImportant={() => onToggleImportant(id)}
-          onToggleDone={() => onToggleDone(id)}
-        /> */}
+        <TodoListItem
+          {...itemProps}
+          onDeleted={(): React.MouseEventHandler => onDeleted(id)}
+          onToggleImportant={(): React.MouseEventHandler =>
+            onToggleImportant(id)
+          }
+          onToggleDone={(): React.MouseEventHandler => onToggleDone(id)}
+        />
       </li>
     );
   });

@@ -1,8 +1,19 @@
-import React, { Component } from 'react';
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import React from 'react';
 
 import './todo-list-item.css';
 
-export const TodoListItem = (): JSX.Element => {
+interface TodoListItemProps {
+  label: string;
+  onDeleted: React.MouseEventHandler;
+  onToggleImportant: React.MouseEventHandler;
+  onToggleDone: React.MouseEventHandler;
+  important: boolean;
+  done: boolean;
+}
+
+export const TodoListItem = (props: TodoListItemProps): JSX.Element => {
   const {
     label,
     onDeleted,
