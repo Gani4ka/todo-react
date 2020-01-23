@@ -13,6 +13,7 @@ describe('<TodoListItem />', (): void => {
       done: false
     };
     const component = shallow(<TodoListItem {...props} />);
-    expect(component).toMatchSnapshot();
+    expect(component.debug()).toMatchSnapshot();
+    // expect(component).toMatchSnapshot();
   });
 });
