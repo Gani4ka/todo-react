@@ -1,22 +1,20 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["dom", "dom.iterable"],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "esModuleInterop": true,
+    "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
-    "strictNullChecks": false,
-    "baseUrl": "./",
-    "allowSyntheticDefaultImports": true,
-    "module": "esnext"
+    "noEmit": true,
+    "jsx": "react",
+    "typeRoots": ["node_modules/@types", "src/app/_shared/typings/**/*"]
   },
-  "exclude": ["node_modules"],
-  "include": ["**/*.ts", "**/*.tsx", "src/components/search-panel/index.ts"]
+  "include": ["src"]
 }
