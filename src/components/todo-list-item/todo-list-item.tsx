@@ -4,7 +4,7 @@ import React from 'react';
 
 import './todo-list-item.css';
 
-interface TodoListItemProps {
+export interface TodoListItemProps {
   label: string;
   onDeleted: React.MouseEventHandler;
   onToggleImportant: React.MouseEventHandler;
