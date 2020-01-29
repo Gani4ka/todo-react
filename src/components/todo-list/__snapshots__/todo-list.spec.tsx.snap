@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TodoList /> should render correctly 1`] = `
+"<ul className=\\"list-group todo-list\\">
+  <li className=\\"list-group-item\\">
+    <TodoListItem label=\\"1\\" important={false} done={false} onDeleted={[Function: onDeleted]} onToggleImportant={[Function: onToggleImportant]} onToggleDone={[Function: onToggleDone]} />
+  </li>
+  <li className=\\"list-group-item\\">
+    <TodoListItem label=\\"2\\" important={false} done={false} onDeleted={[Function: onDeleted]} onToggleImportant={[Function: onToggleImportant]} onToggleDone={[Function: onToggleDone]} />
+  </li>
+</ul>"
+`;
+
+exports[`<TodoList /> should render no items 1`] = `"<ul className=\\"list-group todo-list\\" />"`;

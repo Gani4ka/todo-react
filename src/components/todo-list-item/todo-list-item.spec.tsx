@@ -32,9 +32,17 @@ describe('<TodoListItem />', (): void => {
     expect(props.onDeleted).toBeCalled();
   });
 
-  it('should call onDeleted func', (): void => {
+  it('should call onToggleImportant func', (): void => {
     const component = shallow(<TodoListItem {...props} />);
-    component.find('.btn-outline-danger').simulate('click');
-    expect(props.onDeleted).toBeCalled();
+    component.find('.btn-outline-success').simulate('click');
+    expect(props.onToggleImportant).toBeCalled();
+  });
+
+  it('should call onToggleImportant func', (): void => {
+    const component = shallow(<TodoListItem {...props} />);
+    component
+      .find('.btn-outline-success')
+      .simulate('beforeload', props.onToggleImportant); // 2 errors wtf???
+    expect(props.onDeleted).toHaveBeenCalledTimes(1);
   });
 });

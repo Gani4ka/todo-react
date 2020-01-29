@@ -2,7 +2,7 @@ import React from 'react';
 import TodoListItem from '../todo-list-item';
 import './todo-list.css';
 
-interface TodoListProps {
+export interface TodoListProps {
   todos: Array<{
     id: number;
     important: boolean;
