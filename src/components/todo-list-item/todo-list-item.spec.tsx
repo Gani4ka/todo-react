@@ -3,14 +3,19 @@ import { shallow } from 'enzyme';
 import { TodoListItem, TodoListItemProps } from './todo-list-item';
 
 describe('<TodoListItem />', (): void => {
-  const props: TodoListItemProps = {
-    label: 'text',
-    onDeleted: jest.fn(),
-    onToggleImportant: jest.fn(),
-    onToggleDone: jest.fn(),
-    important: false,
-    done: false
-  };
+  let props: TodoListItemProps;
+
+  beforeEach(() => {
+    props = {
+      label: 'text',
+      onDeleted: jest.fn(),
+      onToggleImportant: jest.fn(),
+      onToggleDone: jest.fn(),
+      important: false,
+      done: false
+    };
+    return props;
+  });
 
   it('should render correctly', (): void => {
     const component = shallow(<TodoListItem {...props} />);
@@ -38,11 +43,9 @@ describe('<TodoListItem />', (): void => {
     expect(props.onToggleImportant).toBeCalled();
   });
 
-  it('should call onToggleImportant func', (): void => {
+  it('should call onToggleDone func', (): void => {
     const component = shallow(<TodoListItem {...props} />);
-    component
-      .find('.btn-outline-success')
-      .simulate('beforeload', props.onToggleImportant); // 2 errors wtf???
-    expect(props.onDeleted).toHaveBeenCalledTimes(1);
+    component.find('.todo-list-item-label').simulate('click');
+    expect(props.onToggleDone).toHaveBeenCalledTimes(1);
   });
 });
