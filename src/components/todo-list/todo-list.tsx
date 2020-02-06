@@ -13,7 +13,6 @@ export interface TodoListProps {
   onToggleImportant: Function;
   onToggleDone: Function;
 }
-
 export const TodoList = ({
   todos,
   onDeleted,
