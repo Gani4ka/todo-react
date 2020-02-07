@@ -1,7 +1,7 @@
 import React from 'react';
 import './app-header.css';
 
-interface AppHeaderProps {
+export interface AppHeaderProps {
   toDo: number;
   done: number;
 }

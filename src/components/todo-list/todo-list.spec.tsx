@@ -9,13 +9,13 @@ describe('<TodoList />', (): void => {
         label: '1',
         important: false,
         done: false,
-        id: 1
+        id: '1'
       },
       {
         label: '2',
         important: false,
         done: false,
-        id: 2
+        id: '2'
       }
     ],
     onDeleted: jest.fn(),

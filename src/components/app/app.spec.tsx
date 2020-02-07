@@ -1,12 +1,8 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { App } from './app';
-import { ItemAddForm } from '../item-add-form/item-add-form';
-import { TodoList } from '../todo-list/todo-list';
-import {
-  TodoListItem,
-  TodoListItemProps
-} from '../todo-list-item/todo-list-item';
+
+// may we mock id?
 
 describe('<App />', (): void => {
   it('should render correctly', (): void => {
@@ -23,7 +19,7 @@ describe('<App />', (): void => {
 describe('<App functions/>', (): void => {
   it('addItem should add item', (): void => {
     const component = mount(<App />);
-    const form = component.find(ItemAddForm);
+    const form = component.find('ItemAddForm');
     form.simulate('submit');
 
     expect(component.find('.list-group').children()).toHaveLength(4);
@@ -49,9 +45,49 @@ describe('<App functions/>', (): void => {
 
     expect(
       component
-        .find(TodoListItem)
+        .find('TodoListItem')
         .first()
         .prop('important')
     ).toEqual(true);
+  });
+
+  it('toggleDone should toggle prop done (id)', (): void => {
+    const component = mount(<App />);
+    component.find('#i2 .todo-list-item-label').simulate('click');
+
+    expect(component.find('li#i2 TodoListItem').prop('done')).toEqual(true);
+  });
+
+  it('done and count initial', (): void => {
+    const component = shallow(<App />);
+
+    expect(component.find('AppHeader').prop('done')).toEqual(0);
+    expect(component.find('AppHeader').prop('toDo')).toEqual(3);
+  });
+
+  it('done and count change', (): void => {
+    const component = mount(<App />);
+
+    component.find('#i2 .todo-list-item-label').simulate('click');
+
+    expect(component.find('AppHeader').prop('done')).toEqual(1);
+    expect(component.find('AppHeader').prop('toDo')).toEqual(2);
+  });
+
+  it('done and count change2', (): void => {
+    const component = mount(<App />);
+
+    component
+      .find('.btn-outline-danger')
+      .first()
+      .simulate('click');
+
+    component
+      .find('.btn-outline-danger')
+      .first()
+      .simulate('click');
+
+    expect(component.find('AppHeader').prop('done')).toEqual(0);
+    expect(component.find('AppHeader').prop('toDo')).toEqual(1);
   });
 });

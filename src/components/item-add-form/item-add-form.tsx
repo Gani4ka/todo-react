@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import './item-add-form.css';
 
-interface ItemAddFormProps {
+export interface ItemAddFormProps {
   onItemAdded: Function;
 }
 

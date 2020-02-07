@@ -4,7 +4,7 @@ import './todo-list.css';
 
 export interface TodoListProps {
   todos: Array<{
-    id: number;
+    id: string;
     important: boolean;
     done: boolean;
     label: string;
@@ -22,7 +22,7 @@ export const TodoList = ({
   const elements = todos.map(item => {
     const { id, ...itemProps } = item;
     return (
-      <li key={id} className='list-group-item'>
+      <li key={id} id={id} className='list-group-item'>
         <TodoListItem
           {...itemProps}
           onDeleted={(): React.MouseEventHandler => onDeleted(id)}

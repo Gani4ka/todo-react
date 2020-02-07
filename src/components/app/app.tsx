@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import AppHeader from '../app-header';
-import SearchPanel from '../search-panel';
 import TodoList from '../todo-list';
-import ItemStatusFilter from '../item-status-filter';
 import ItemAddForm from '../item-add-form';
 
 import './app.css';
@@ -13,19 +11,19 @@ export const App = (): JSX.Element => {
       label: '1',
       important: false,
       done: false,
-      id: Math.random()
+      id: 'i1'
     },
     {
       label: '2',
       important: false,
       done: false,
-      id: Math.random()
+      id: 'i2'
     },
     {
       label: '3',
       important: false,
       done: false,
-      id: Math.random()
+      id: 'i3'
     }
   ]);
 
@@ -35,13 +33,13 @@ export const App = (): JSX.Element => {
     label: string;
     important: boolean;
     done: boolean;
-    id: number;
+    id: string;
   } => {
     return {
       label,
       important: false,
       done: false,
-      id: Math.random()
+      id: Math.random().toString()
     };
   };
 
@@ -50,16 +48,16 @@ export const App = (): JSX.Element => {
     setTodoData([...todoData, newItem]);
   };
 
-  const deleteItem = (id: number): void => {
-    const idx = todoData.findIndex(el => el.id === id);
+  const deleteItem = (id: string): void => {
+    const idx = todoData.findIndex(el => el.id.toString() === id.toString());
 
     const newArray = [...todoData.slice(0, idx), ...todoData.slice(idx + 1)];
 
     setTodoData(newArray);
   };
 
-  const toggleImportant = (id: number): void => {
-    const idx = todoData.findIndex(el => el.id === id);
+  const toggleImportant = (id: string): void => {
+    const idx = todoData.findIndex(el => el.id.toString() === id.toString());
     const oldItem = todoData[idx];
     const newItem = { ...oldItem, important: !oldItem.important };
     setTodoData([
@@ -69,8 +67,8 @@ export const App = (): JSX.Element => {
     ]);
   };
 
-  const toggleDone = (id: number): void => {
-    const idx = todoData.findIndex(el => el.id === id);
+  const toggleDone = (id: string): void => {
+    const idx = todoData.findIndex(el => el.id.toString() === id.toString());
     const oldItem = todoData[idx];
     const newItem = { ...oldItem, done: !oldItem.done };
     setTodoData([
@@ -86,10 +84,6 @@ export const App = (): JSX.Element => {
   return (
     <div className='todo-app'>
       <AppHeader toDo={todoCount} done={doneCount} />
-      <div className='top-panel d-flex'>
-        <SearchPanel />
-        <ItemStatusFilter />
-      </div>
 
       <TodoList
         todos={todoData}

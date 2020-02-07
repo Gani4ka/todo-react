@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ItemAddForm /> should render correctly 1`] = `
+"<form className=\\"item-add-form d-flex\\" onSubmit={[Function: onSubmit]}>
+  <input type=\\"text\\" className=\\"form-control\\" onChange={[Function: onLabelChange]} placeholder=\\"What needs to be done\\" value=\\"\\" />
+  <button className=\\"btn btn-outline-secondary\\">
+    Add
+  </button>
+</form>"
+`;
