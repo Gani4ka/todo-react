@@ -1,18 +1,16 @@
 import React from 'react';
 import TodoListItem from '../todo-list-item';
 import './todo-list.css';
+// eslint-disable-next-line import/no-cycle
+import { TodoItemInterface } from '../app/app';
 
 export interface TodoListProps {
-  todos: Array<{
-    id: string;
-    important: boolean;
-    done: boolean;
-    label: string;
-  }>;
+  todos: TodoItemInterface[];
   onDeleted: Function;
   onToggleImportant: Function;
   onToggleDone: Function;
 }
+
 export const TodoList = ({
   todos,
   onDeleted,

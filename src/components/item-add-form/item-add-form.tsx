@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import './item-add-form.css';
 
 export interface ItemAddFormProps {
-  onItemAdded: Function;
+  onItemAdded(arg0: string): void;
 }
 
 export const ItemAddForm = (props: ItemAddFormProps): JSX.Element => {

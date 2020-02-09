@@ -2,11 +2,17 @@ import React, { useState } from 'react';
 import AppHeader from '../app-header';
 import TodoList from '../todo-list';
 import ItemAddForm from '../item-add-form';
-
 import './app.css';
 
+export interface TodoItemInterface {
+  label: string;
+  important: boolean;
+  done: boolean;
+  id: string;
+}
+
 export const App = (): JSX.Element => {
-  const [todoData, setTodoData] = useState([
+  const initialState: TodoItemInterface[] = [
     {
       label: '1',
       important: false,
@@ -25,16 +31,11 @@ export const App = (): JSX.Element => {
       done: false,
       id: 'i3'
     }
-  ]);
+  ];
 
-  const createTodoItem = (
-    label: string
-  ): {
-    label: string;
-    important: boolean;
-    done: boolean;
-    id: string;
-  } => {
+  const [todoData, setTodoData] = useState(initialState);
+
+  const createTodoItem = (label: string): TodoItemInterface => {
     return {
       label,
       important: false,

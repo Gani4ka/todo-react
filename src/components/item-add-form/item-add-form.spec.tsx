@@ -4,7 +4,7 @@ import { ItemAddForm, ItemAddFormProps } from './item-add-form';
 
 describe('<ItemAddForm />', (): void => {
   const prop: ItemAddFormProps = {
-    onItemAdded: () => {}
+    onItemAdded: jest.fn()
   };
   it('should render correctly', (): void => {
     const component = shallow(<ItemAddForm {...prop} />);
@@ -13,7 +13,12 @@ describe('<ItemAddForm />', (): void => {
 
   it('should call handler', (): void => {
     const component = shallow(<ItemAddForm {...prop} />);
-    component.find('.btn').simulate('click');
+    const form = component.find('form');
+
+    form.simulate('submit', {
+      preventDefault: () => {}
+    });
+
     expect(prop.onItemAdded).toBeCalled();
   });
 });
