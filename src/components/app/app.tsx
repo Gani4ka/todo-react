@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useReducer, useMemo } from 'react';
+import reducer from '../utils/reducer';
 import AppHeader from '../app-header';
+// eslint-disable-next-line import/no-cycle
 import TodoList from '../todo-list';
 import ItemAddForm from '../item-add-form';
 import './app.css';
@@ -11,29 +13,29 @@ export interface TodoItemInterface {
   id: string;
 }
 
-export const App = (): JSX.Element => {
-  const initialState: TodoItemInterface[] = [
-    {
-      label: '1',
-      important: false,
-      done: false,
-      id: 'i1'
-    },
-    {
-      label: '2',
-      important: false,
-      done: false,
-      id: 'i2'
-    },
-    {
-      label: '3',
-      important: false,
-      done: false,
-      id: 'i3'
-    }
-  ];
+const initialState: TodoItemInterface[] = [
+  {
+    label: '1',
+    important: false,
+    done: false,
+    id: 'i1'
+  },
+  {
+    label: '2',
+    important: false,
+    done: false,
+    id: 'i2'
+  },
+  {
+    label: '3',
+    important: false,
+    done: false,
+    id: 'i3'
+  }
+];
 
-  const [todoData, setTodoData] = useState(initialState);
+export const App = (): JSX.Element => {
+  const [todoData, dispatch] = useReducer(reducer, initialState);
 
   const createTodoItem = (label: string): TodoItemInterface => {
     return {
@@ -46,41 +48,35 @@ export const App = (): JSX.Element => {
 
   const addItem = (text: string): void => {
     const newItem = createTodoItem(text);
-    setTodoData([...todoData, newItem]);
+    dispatch({ type: 'addItem', payload: newItem });
   };
 
   const deleteItem = (id: string): void => {
-    const idx = todoData.findIndex(el => el.id.toString() === id.toString());
-
-    const newArray = [...todoData.slice(0, idx), ...todoData.slice(idx + 1)];
-
-    setTodoData(newArray);
+    dispatch({ type: 'deleteItem', payload: id });
   };
 
   const toggleImportant = (id: string): void => {
-    const idx = todoData.findIndex(el => el.id.toString() === id.toString());
-    const oldItem = todoData[idx];
-    const newItem = { ...oldItem, important: !oldItem.important };
-    setTodoData([
-      ...todoData.slice(0, idx),
-      newItem,
-      ...todoData.slice(idx + 1)
-    ]);
+    dispatch({ type: 'toggleImportant', payload: id });
   };
 
   const toggleDone = (id: string): void => {
-    const idx = todoData.findIndex(el => el.id.toString() === id.toString());
-    const oldItem = todoData[idx];
-    const newItem = { ...oldItem, done: !oldItem.done };
-    setTodoData([
-      ...todoData.slice(0, idx),
-      newItem,
-      ...todoData.slice(idx + 1)
-    ]);
+    dispatch({ type: 'toggleDone', payload: id });
   };
 
-  const doneCount = todoData.filter(el => el.done).length;
-  const todoCount = todoData.length - doneCount;
+  const doneCount = useMemo(() => {
+    const numberOfItemsTodo = todoData.filter(
+      (el: TodoItemInterface) => el.done
+    ).length;
+    return numberOfItemsTodo;
+  }, [
+    todoData.length,
+    todoData.filter((el: TodoItemInterface) => el.done).length
+  ]);
+
+  const todoCount = useMemo(() => todoData.length - doneCount, [
+    todoData.length,
+    doneCount
+  ]);
 
   return (
     <div className='todo-app'>
