@@ -1,17 +1,10 @@
 import React, { useReducer, useMemo } from 'react';
-import reducer from '../utils/reducer';
+import reducer, { TodoItemInterface } from '../utils/reducer';
 import AppHeader from '../app-header';
 // eslint-disable-next-line import/no-cycle
 import TodoList from '../todo-list';
 import ItemAddForm from '../item-add-form';
 import './app.css';
-
-export interface TodoItemInterface {
-  label: string;
-  important: boolean;
-  done: boolean;
-  id: string;
-}
 
 const initialState: TodoItemInterface[] = [
   {
@@ -93,3 +86,6 @@ export const App = (): JSX.Element => {
     </div>
   );
 };
+
+// useCalback
+// tests

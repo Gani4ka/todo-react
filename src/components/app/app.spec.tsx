@@ -9,11 +9,6 @@ describe('<App />', (): void => {
     const component = shallow(<App />);
     expect(component.debug()).toMatchSnapshot();
   });
-
-  it('should render correctly2', (): void => {
-    const component = mount(<App />);
-    expect(component.debug()).toMatchSnapshot();
-  });
 });
 
 describe('<App functions/>', (): void => {

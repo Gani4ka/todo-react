@@ -2,8 +2,8 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import './todo-list-item.css';
-// eslint-disable-next-line import/no-cycle
-import { TodoItemInterface } from '../app/app';
+import { Omit } from 'yargs';
+import { TodoItemInterface } from '../utils/reducer';
 
 export interface TodoListItemProps extends Omit<TodoItemInterface, 'id'> {
   onDeleted: React.MouseEventHandler;

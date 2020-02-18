@@ -1,8 +1,8 @@
 import React from 'react';
+// eslint-disable-next-line import/no-cycle
 import TodoListItem from '../todo-list-item';
 import './todo-list.css';
-// eslint-disable-next-line import/no-cycle
-import { TodoItemInterface } from '../app/app';
+import { TodoItemInterface } from '../utils/reducer';
 
 export interface TodoListProps {
   todos: TodoItemInterface[];
